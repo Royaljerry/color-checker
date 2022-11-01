@@ -1,10 +1,10 @@
 {
-  "name": "email-signature-generator",
+  "name": "color-checker",
   "version": "1.0.0",
-  "description": "This app generates responsive and personalised email signatures, that can be used in any rich text editor (like the one of GMail).",
+  "description": "Check colors against each other. Select acceptable background-foreground variations, and collect results.",
   "main": "gulpfile.babel.js",
-  "repository": "ssh://git@gitlab.liligo.com:2222/frontend/email-signature-generator.git",
-  "author": "Adam Pócs <adam.pocs@edreamsodigeo.com>",
+  "repository": "https://github.com/Royaljerry/color-checker.git",
+  "author": "Adam Pócs <royaljerry@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "gulp",
