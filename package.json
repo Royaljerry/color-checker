@@ -7,8 +7,7 @@
   "author": "Adam Pócs <royaljerry@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "gulp",
-    "prod": "gulp prod"
+    "start": "gulp"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -18,8 +17,6 @@
     "gulp": "^4.0.2",
     "gulp-dart-sass": "^1.0.2",
     "gulp-file-include": "^2.3.0",
-    "gulp-inline-source": "^4.0.0",
-    "gulp-jsonminify": "^1.1.0",
     "gulp-load-plugins": "^2.0.7",
     "gulp-minify": "^3.1.0",
     "gulp-replace": "^1.1.3",
@@ -27,8 +24,7 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "rimraf": "^3.0.2",
     "siphon-media-query": "^1.0.0",
-    "typescript": "^4.4.4",
-    "yargs": "^17.2.1"
+    "typescript": "^4.4.4"
   },
   "babel": {
     "presets": [
