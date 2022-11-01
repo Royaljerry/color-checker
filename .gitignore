@@ -175,3 +175,29 @@ Temporary Items
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/adobe,macos,visualstudiocode,intellij
+
+## ****************************************************************
+## APP
+## ****************************************************************
+
+/build/dev
+/node_modules
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+debug.log
+yarn-error.log
+testem.log
+/typings
+
+## ****************************************************************
+## RESOURCES
+## ****************************************************************
+
+/resources/arrivals/
+/resources/temp/
+/resources/trash/
+/resources/info/sample/
+/build
