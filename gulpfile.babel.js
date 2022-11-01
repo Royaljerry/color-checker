@@ -141,7 +141,7 @@ function watchProd() {
 		minifyJs,
 		minifyJson,
 		includeFile,
-		cleanProd,
+		// cleanProd,
 		browser.reload
 	));
 }
@@ -154,13 +154,13 @@ function watchProd() {
 // 	);
 // }
 
-function cleanProd() {
-	return(
-		del([
-			`${buildDir}/${CONF['nameScript']}.js`
-		])
-	);
-}
+// function cleanProd() {
+// 	return(
+// 		del([
+// 			`${buildDir}/${CONF['nameScript']}.js`
+// 		])
+// 	);
+// }
 
 // --------------------------------
 // Helper
@@ -216,7 +216,7 @@ if(WATCH_PROD) {
 		minifyJs,
 		minifyJson,
 		includeFile,
-		cleanProd,
+		// cleanProd,
 		serve,
 		watchProd
 	));
@@ -227,7 +227,7 @@ if(WATCH_PROD) {
 		'build',
 		minifyJs,
 		minifyJson,
-		includeFile,
-		cleanProd
+		includeFile
+		// cleanProd
 	));
 }
