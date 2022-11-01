@@ -1,0 +1,161 @@
+// ================================================
+// Colors
+// ================================================
+
+// --------------------------------
+// Generics
+// --------------------------------
+
+$color__black: #000000;
+$color__white: #ffffff;
+$color__transparent: rgba(0,0,0,0);
+
+// --------------------------------
+// Brands
+// --------------------------------
+
+$color__brand--primary-green: #74bd56; // 116, 189, 86
+$color__brand--brand-green: #c9ee00; // 201, 238, 0
+$color__brand--base-dark-blue: #00223e; // 0, 34, 62
+
+// --------------------------------
+// UIs
+// --------------------------------
+
+$color__ui--warning-error: #d0021b; // 208, 2, 27
+$color__ui--validation: #4faf3e; // 79, 175, 62
+$color__ui--link-blue: #0074ee; // 0, 116, 238
+$color__ui--deeplink-cta: #ff5600; // 255, 86, 0
+$color__ui--watch-out: #eb5769; // 235, 87, 105
+$color__ui--social: #698693;
+
+// --------------------------------
+// Notifications
+// --------------------------------
+
+$color__notification--http-error-light: #fae5e8; // 250, 229, 232
+$color__notification--http-error-dark: $color__ui--warning-error;
+$color__notification--no-internet-light: #f9e8bb; // 249, 232, 187
+$color__notification--no-internet-dark: $color__ui--deeplink-cta;
+
+// --------------------------------
+// Greys
+// --------------------------------
+
+$color__greys--100: $color__brand--base-dark-blue;
+$color__greys--85: #26435b; // 38, 67, 91
+$color__greys--70: #4c6477; // 76, 100, 119
+$color__greys--60: #667a8b; // 102, 122, 139
+$color__greys--50: #7f909e; // 127, 144, 158
+$color__greys--35: #a6b2bc; // 166, 178, 188
+$color__greys--20: #ccd3d8; // 204, 211, 216
+$color__greys--10: #e5e8eb; // 229, 232, 235
+$color__greys--5: #f2f4f5; // 242, 244, 245
+
+// ================================================
+// Typography
+// ================================================
+
+// --------------------------------
+// Font families
+// --------------------------------
+
+$typography__font-family--default: "Open Sans", Helvetica, Arial, sans-serif;
+$typography__font-family--code: "Fira Mono", Courier, "Courier New", monospace;
+
+// --------------------------------
+// Font sizes
+// --------------------------------
+
+$typography__font-size--XXS: 0.6250rem; //12px
+$typography__font-size--XS: 0.7500rem; //12px
+$typography__font-size--S: 0.8750rem; //14px
+$typography__font-size--M: 1.0000rem; //16px
+$typography__font-size--L: 1.2500rem; //20px
+$typography__font-size--XL: 1.3750rem; //22px
+$typography__font-size--XXL: 1.7500rem; //28px
+
+// --------------------------------
+// Font weights
+// --------------------------------
+
+$typography__font-weight--regular: 400;
+$typography__font-weight--semi-bold: 600;
+$typography__font-weight--bold: 700;
+
+// --------------------------------
+// Line heights
+// --------------------------------
+
+$typography__line-height--normal: 1.3;
+$typography__line-height--large: 1.5;
+
+// ================================================
+// Breakpoints
+// ================================================
+
+$breakpoint__S: 30rem; // 480px
+$breakpoint__M: 48rem; // 768px
+$breakpoint__L: 64rem; // 1024px
+
+// ================================================
+// Metrics
+// ================================================
+
+// --------------------------------
+// Units
+// --------------------------------
+
+$rem-base: 16px !default;
+
+// --------------------------------
+// Form-elems-heights
+// --------------------------------
+
+$metrics__form-elem-height--S: 1.5rem;
+$metrics__form-elem-height--M: 2rem;
+$metrics__form-elem-height--L: 2.5rem;
+$metrics__form-elem-height--XL: 3rem;
+
+// --------------------------------
+// Gaps
+// --------------------------------
+
+$metrics__gap--XXS: 0.5000rem; // 4px
+$metrics__gap--XS: 0.5000rem; // 8px
+$metrics__gap--S: 1.0000rem; // 16px
+$metrics__gap--M: 1.5000rem; // 24px
+$metrics__gap--L: 2.0000rem; // 32px
+$metrics__gap--XL: 4.0000rem; // 64px
+
+// --------------------------------
+// Widths
+// --------------------------------
+
+$metrics__width--content: $breakpoint__S - (2 * $metrics__gap--L);
+$metrics__width--content-max: unit(64);
+
+// --------------------------------
+// Roundings
+// --------------------------------
+
+$metrics__rounding--S: 0.2500rem;
+$metrics__rounding--M: 0.5000rem;
+$metrics__rounding--L: 1.0000rem;
+
+// --------------------------------
+// Elements
+// --------------------------------
+
+$metrics__id--size: 4rem;
+$metrics__menu-item--size: unit(1.625);
+$metrics__social--size: 1rem;
+$metrics__markup--height: unit(16);
+
+// ================================================
+// Durations
+// ================================================
+
+$duration__slower: 1s;
+$duration__slow: 0.5s;
+$duration__default: 0.25s;

@@ -1,0 +1,17 @@
+@function strip-unit($num) {
+	@return $num / ($num * 0 + 1);
+}
+
+@function to-rem($value, $base-value: $rem-base) {
+	$value: strip-unit($value) / strip-unit($base-value) * 1rem;
+	@if ($value == 0rem) { $value: 0; } // Turn 0rem into 0
+	@return $value;
+}
+
+@function unit($multiplier: 1, $in-rem: false, $base: $rem-base) {
+	@if ($in-rem) {
+		@return to-rem($multiplier * $base);
+	} @else {
+		@return $multiplier * $base;
+	}
+}

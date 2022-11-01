@@ -1,0 +1,134 @@
+@use 'sass:math';
+@import "constants";
+
+@mixin respondFrom($minWidth: $breakpoint__M, $forcePortrait: false) {
+	@if $forcePortrait {
+		@media (min-width: $minWidth) and (orientation: portrait) {
+			@content;
+		}
+	} @else {
+		@media (min-width: $minWidth) {
+			@content;
+		}
+	}
+}
+
+@mixin gaps($padding: 0, $margin: 0) {
+	padding: $padding;
+	margin: $margin;
+}
+
+@mixin size($size) {
+	width: $size;
+	height: $size;
+}
+
+@mixin limitWidth(
+	$max-width: $metrics__width--content-max,
+	$width: auto,
+	$padding: 0 $metrics__gap--S
+) {
+	width: $width;
+	max-width: $max-width;
+	padding: $padding;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@mixin focus($box-shadow) {
+	&:focus,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+		outline: none !important;
+		box-shadow: $box-shadow;
+		transition: all $duration__default;
+	}
+}
+
+@mixin text(
+	$font-size: $typography__font-size--M,
+	$font-weight: $typography__font-weight--regular,
+	$color: $color__brand--base-dark-blue,
+	$line-height: $typography__line-height--normal
+) {
+	font-size: $font-size;
+	font-weight: $font-weight;
+	color: $color;
+	line-height: $line-height;
+}
+
+@mixin formItem(
+	$backgroundColor: $color__greys--5,
+	$rounding: unit(0.25)
+) {
+	@include gaps;
+	height: unit(3.5);
+	width: 100%;
+	border-radius: $rounding;
+	background-color: $backgroundColor;
+}
+
+@mixin shadow(
+	$size: 0px $metrics__gap--XS $metrics__gap--XS #{-$metrics__gap--XS},
+	$color: $color__brand--base-dark-blue,
+	$alpha: 0.2
+) {
+	box-shadow: $size rgba($color, $alpha);
+}
+
+@mixin arrow(
+	$direction: right,
+	$color: $color__brand--base-dark-blue,
+	$opacity: 1,
+	$margin: 0 0 0 0,
+	$size: 0.75rem,
+	$weight: 0.125rem
+) {
+	$diameter: math.div($size, 1.414213562);
+	&:after {
+		@include size($diameter);
+		box-sizing: border-box;
+		content: "";
+		display: inline-block;
+		transform: rotateZ(-45deg);
+		opacity: $opacity;
+		margin: $margin;
+		border-color: $color;
+		border-style: solid;
+		border-width: 0;
+		-webkit-tap-highlight-color: transparent;
+		@if ($direction == top) {
+			border-top-width: $weight;
+			border-right-width: $weight;
+		} @else if ($direction == right) {
+			border-right-width: $weight;
+			border-bottom-width: $weight;
+		} @else if ($direction == bottom) {
+			border-bottom-width: $weight;
+			border-left-width: $weight;
+		} @else if ($direction == left) {
+			border-left-width: $weight;
+			border-top-width: $weight;
+		}
+	}
+}
+
+@mixin label(
+	$text,
+	$color: $color__greys--60,
+	$background: $color__greys--10
+) {
+	position: relative;
+
+	&:before {
+		@include text($typography__font-size--XXS, $typography__font-weight--bold, $color, 1);
+		content: $text;
+		position: absolute;
+		left: -1px;
+		top: 0;
+		border-bottom-right-radius: unit(0.25);
+		background-color: $background;
+		padding: unit(0.5);
+		text-transform: uppercase;
+	}
+}
