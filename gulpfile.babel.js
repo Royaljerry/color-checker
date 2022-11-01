@@ -33,7 +33,6 @@ const CONF = {
 	'buildDirDev': 'build/dev',
 	'buildDirProd': 'build/prod',
 	'nameTemplate': 'index',
-	'nameSignature': 'signature',
 	'nameScript': 'app',
 	'nameStyle': 'style',
 	'nameData': 'data'
@@ -123,12 +122,6 @@ function minifyJs() {
 		.pipe(gulp.dest(`${buildDir}`));
 }
 
-function minifyCss() {
-	return gulp.src([`${buildDir}/${CONF['nameSignature']}.html`])
-		.pipe(inliner())
-		.pipe(gulp.dest(buildDir));
-}
-
 function minifyJson() {
 	return gulp.src([`${buildDir}/${CONF['nameData']}.json`])
 		.pipe(jsonminify())
@@ -138,7 +131,6 @@ function minifyJson() {
 function watchDev() {
 	gulp.watch(`${CONF['sourceDir']}/*.(html|scss|ts|json)`).on('all', gulp.series(
 		'build',
-		// cleanSignatureDev,
 		includeFile,
 		cleanDev,
 		browser.reload
@@ -149,7 +141,6 @@ function watchProd() {
 	gulp.watch(`${CONF['sourceDir']}/*.*`).on('all', gulp.series(
 		'build',
 		minifyJs,
-		minifyCss,
 		minifyJson,
 		includeFile,
 		cleanProd,
@@ -158,25 +149,13 @@ function watchProd() {
 }
 
 function cleanDev() {
-	return(
-		del([
-			`${buildDir}/${CONF['nameSignature']}.html`
-		])
-	);
-}
-
-// FixMe:
-function cleanSignatureDev() {
-	return gulp.src([`${buildDir}/${CONF['nameSignature']}.html`])
-		.pipe(replace, /<link rel="stylesheet"[^>]*>/, '')
-		.pipe(gulp.dest(buildDir));
+	console.log('cleanDev'); //ToDo
 }
 
 function cleanProd() {
 	return(
 		del([
-			`${buildDir}/${CONF['nameScript']}.js`,
-			`${buildDir}/${CONF['nameSignature']}.html`
+			`${buildDir}/${CONF['nameScript']}.js`
 		])
 	);
 }
@@ -221,7 +200,6 @@ gulp.task('default', gulp.series(
 	setBuildDirToDev,
 	clean,
 	'build',
-	// cleanSignatureDev,
 	includeFile,
 	cleanDev,
 	serve,
@@ -234,7 +212,6 @@ if(WATCH_PROD) {
 		clean,
 		'build',
 		minifyJs,
-		minifyCss,
 		minifyJson,
 		includeFile,
 		cleanProd,
@@ -247,7 +224,6 @@ if(WATCH_PROD) {
 		clean,
 		'build',
 		minifyJs,
-		minifyCss,
 		minifyJson,
 		includeFile,
 		cleanProd
