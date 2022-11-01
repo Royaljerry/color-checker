@@ -1,0 +1,43 @@
+{
+  "name": "email-signature-generator",
+  "version": "1.0.0",
+  "description": "This app generates responsive and personalised email signatures, that can be used in any rich text editor (like the one of GMail).",
+  "main": "gulpfile.babel.js",
+  "repository": "ssh://git@gitlab.liligo.com:2222/frontend/email-signature-generator.git",
+  "author": "Adam Pócs <adam.pocs@edreamsodigeo.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "gulp",
+    "prod": "gulp prod"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "browser-sync": "^2.27.6",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-file-include": "^2.3.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-inline-css": "^4.0.0",
+    "gulp-inline-source": "^4.0.0",
+    "gulp-jsonminify": "^1.1.0",
+    "gulp-load-plugins": "^2.0.7",
+    "gulp-minify": "^3.1.0",
+    "gulp-replace": "^1.1.3",
+    "gulp-sass": "^5.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "lazypipe": "^1.0.2",
+    "rimraf": "^3.0.2",
+    "siphon-media-query": "^1.0.0",
+    "typescript": "^4.4.4",
+    "yargs": "^17.2.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "dependencies": {}
+}
