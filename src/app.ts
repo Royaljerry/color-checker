@@ -376,7 +376,7 @@ function updateMessage(messageText: string, messageType: MessageType) {
 // ****************************************************************
 
 function main() {
-	console.log('hello world again and again');
+	console.log('baz');
 	fetch('./data.json')
 		.then(response => response.json())
 		.then(data => DATA = data)

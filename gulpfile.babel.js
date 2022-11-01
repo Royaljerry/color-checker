@@ -6,15 +6,12 @@ import gulp from 'gulp';
 import rimraf from "rimraf";
 import browser from 'browser-sync';
 import sass from 'gulp-dart-sass';
-// import lazypipe from "lazypipe";
 import plugins from "gulp-load-plugins";
 import inlinesource from 'gulp-inline-source';
-import del from 'del';
 import yargs from 'yargs';
 import jsonminify from 'gulp-jsonminify';
 import ts from 'gulp-typescript';
 import fileinclude from 'gulp-file-include';
-// import replace from 'gulp-replace';
 
 // ****************************************************************
 // CONFIGURATION
@@ -130,7 +127,6 @@ function watchDev() {
 	gulp.watch(`${CONF['sourceDir']}/*.(html|scss|ts|json)`).on('all', gulp.series(
 		'build',
 		includeFile,
-		// cleanDev,
 		browser.reload
 	));
 }
@@ -141,47 +137,9 @@ function watchProd() {
 		minifyJs,
 		minifyJson,
 		includeFile,
-		// cleanProd,
 		browser.reload
 	));
 }
-
-// function cleanDev() {
-// 	return(
-// 		del([
-// 			`${buildDir}/${CONF['nameTemplate']}.html`
-// 		])
-// 	);
-// }
-
-// function cleanProd() {
-// 	return(
-// 		del([
-// 			`${buildDir}/${CONF['nameScript']}.js`
-// 		])
-// 	);
-// }
-
-// --------------------------------
-// Helper
-// --------------------------------
-
-// function inliner() {
-// 	const pipe = lazypipe()
-// 		.pipe($.inlineCss, {
-// 			applyStyleTags: false,
-// 			removeStyleTags: true,
-// 			preserveMediaQueries: false,
-// 			removeLinkTags: false,
-// 			removeHtmlSelectors: false
-// 		})
-// 		.pipe($.replace, /<link rel="stylesheet"[^>]*>/, '')
-// 		.pipe($.htmlmin, {
-// 			collapseWhitespace: true,
-// 			minifyCSS: true
-// 		});
-// 	return pipe();
-// }
 
 // ================================================
 // Compound
@@ -203,7 +161,6 @@ gulp.task('default', gulp.series(
 	clean,
 	'build',
 	includeFile,
-	// cleanDev,
 	serve,
 	watchDev
 ));
@@ -216,7 +173,6 @@ if(WATCH_PROD) {
 		minifyJs,
 		minifyJson,
 		includeFile,
-		// cleanProd,
 		serve,
 		watchProd
 	));
@@ -228,6 +184,5 @@ if(WATCH_PROD) {
 		minifyJs,
 		minifyJson,
 		includeFile
-		// cleanProd
 	));
 }
