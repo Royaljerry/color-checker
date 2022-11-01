@@ -6,9 +6,7 @@ import gulp from 'gulp';
 import rimraf from "rimraf";
 import browser from 'browser-sync';
 import sass from 'gulp-dart-sass';
-import fs from 'fs';
-import siphon from "siphon-media-query";
-import lazypipe from "lazypipe";
+// import lazypipe from "lazypipe";
 import plugins from "gulp-load-plugins";
 import inlinesource from 'gulp-inline-source';
 import del from 'del';
@@ -16,7 +14,7 @@ import yargs from 'yargs';
 import jsonminify from 'gulp-jsonminify';
 import ts from 'gulp-typescript';
 import fileinclude from 'gulp-file-include';
-import replace from 'gulp-replace';
+// import replace from 'gulp-replace';
 
 // ****************************************************************
 // CONFIGURATION
@@ -132,7 +130,7 @@ function watchDev() {
 	gulp.watch(`${CONF['sourceDir']}/*.(html|scss|ts|json)`).on('all', gulp.series(
 		'build',
 		includeFile,
-		cleanDev,
+		// cleanDev,
 		browser.reload
 	));
 }
@@ -148,9 +146,13 @@ function watchProd() {
 	));
 }
 
-function cleanDev() {
-	console.log('cleanDev'); //ToDo
-}
+// function cleanDev() {
+// 	return(
+// 		del([
+// 			`${buildDir}/${CONF['nameTemplate']}.html`
+// 		])
+// 	);
+// }
 
 function cleanProd() {
 	return(
@@ -164,22 +166,22 @@ function cleanProd() {
 // Helper
 // --------------------------------
 
-function inliner() {
-	const pipe = lazypipe()
-		.pipe($.inlineCss, {
-			applyStyleTags: false,
-			removeStyleTags: true,
-			preserveMediaQueries: false,
-			removeLinkTags: false,
-			removeHtmlSelectors: false
-		})
-		.pipe($.replace, /<link rel="stylesheet"[^>]*>/, '')
-		.pipe($.htmlmin, {
-			collapseWhitespace: true,
-			minifyCSS: true
-		});
-	return pipe();
-}
+// function inliner() {
+// 	const pipe = lazypipe()
+// 		.pipe($.inlineCss, {
+// 			applyStyleTags: false,
+// 			removeStyleTags: true,
+// 			preserveMediaQueries: false,
+// 			removeLinkTags: false,
+// 			removeHtmlSelectors: false
+// 		})
+// 		.pipe($.replace, /<link rel="stylesheet"[^>]*>/, '')
+// 		.pipe($.htmlmin, {
+// 			collapseWhitespace: true,
+// 			minifyCSS: true
+// 		});
+// 	return pipe();
+// }
 
 // ================================================
 // Compound
@@ -201,7 +203,7 @@ gulp.task('default', gulp.series(
 	clean,
 	'build',
 	includeFile,
-	cleanDev,
+	// cleanDev,
 	serve,
 	watchDev
 ));
