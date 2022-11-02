@@ -19,7 +19,7 @@ interface Color {
 // VARIABLES
 // ****************************************************************
 
-let DATA: any = {};
+let CC_DATA: any = {};
 
 // ****************************************************************
 // FUNCTIONS
@@ -65,8 +65,8 @@ function start() {
 	console.log('hello world');
 	fetch('./data.json')
 		.then(response => response.json())
-		.then(data => DATA = data)
-		.then(() => console.log(DATA.colors[0].name))
+		.then(data => CC_DATA = data)
+		.then(() => console.log(CC_DATA.colors[0].name))
 }
 
 start();
