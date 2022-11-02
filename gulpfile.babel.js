@@ -45,13 +45,14 @@ function clean(done) {
 	rimraf(`${CONF["buildDir"]}`, done);
 }
 
-function templates() {
-	return gulp.src([`${CONF['sourceDir']}/*.html`])
+function assets() {
+	return gulp.src([`${CONF['sourceDir']}/*.+(svg|png|jpg)`])
 		.pipe(gulp.dest(`${CONF["buildDir"]}`));
 }
 
-function assets() {
-	
+function templates() {
+	return gulp.src([`${CONF['sourceDir']}/*.html`])
+		.pipe(gulp.dest(`${CONF["buildDir"]}`));
 }
 
 function script() {
@@ -87,16 +88,16 @@ function serve(done) {
 // Specific
 // --------------------------------
 
-function includeFile() {
+function include() {
 	return gulp.src([`${CONF["buildDir"]}/${CONF['nameTemplate']}.html`])
 		.pipe(fileinclude())
 		.pipe(gulp.dest(`${CONF["buildDir"]}`));
 }
 
-function watchDev() {
-	gulp.watch(`${CONF['sourceDir']}/*.(html|scss|ts|json)`).on('all', gulp.series(
+function watch() {
+	gulp.watch(`${CONF['sourceDir']}/*.(html|scss|ts|json|svg)`).on('all', gulp.series(
 		'build',
-		includeFile,
+		include,
 		browser.reload
 	));
 }
@@ -106,6 +107,8 @@ function watchDev() {
 // ================================================
 
 gulp.task('build', gulp.series(
+	clean,
+	assets,
 	templates,
 	script,
 	style,
@@ -117,9 +120,8 @@ gulp.task('build', gulp.series(
 // ================================================
 
 gulp.task('default', gulp.series(
-	clean,
 	'build',
-	includeFile,
+	include,
 	serve,
-	watchDev
+	watch
 ));
