@@ -50,6 +50,10 @@ function templates() {
 		.pipe(gulp.dest(`${CONF["buildDir"]}`));
 }
 
+function assets() {
+	
+}
+
 function script() {
 	return gulp.src([`${CONF['sourceDir']}/${CONF['nameScript']}.ts`])
 		.pipe(ts({

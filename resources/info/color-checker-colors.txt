@@ -1,0 +1,7 @@
+https://m2.material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=90a4ae
+
+primary: #90a4ae
+light: #c1d5e0
+dark: #62757f
+gray-dark: #e1e2e1
+gray-light: #f5f5f6
