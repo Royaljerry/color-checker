@@ -1,3 +1,38 @@
 {
-	"foo": "bar"
+	"colors": {
+		"white": {
+			"value": "#ffffff",
+			"type": "light",
+			"include": false
+		},
+		"grayLighter": {
+			"value": "#f5f5f6",
+			"type": "light"
+		},
+		"grayLight": {
+			"value": "#e5e1e3",
+			"type": "light"
+		},
+		"grayMid": {
+			"value": "#bfbbbd",
+			"type": "light"
+		},
+		"grayDark": {
+			"value": "#818387",
+			"type": "dark"
+		},
+		"grayDarker": {
+			"value": "#3e4147",
+			"type": "dark"
+		},
+		"black": {
+			"value": "#000000",
+			"type": "dark",
+			"include": false
+		},
+		"accent": {
+			"value": "#cc2e2e",
+			"type": "dark"
+		}
+	}
 }
