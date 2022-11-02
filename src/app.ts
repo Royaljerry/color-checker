@@ -12,7 +12,7 @@ interface Color {
 	name: string;
 	value: string;
 	type: ColorType;
-	include: boolean;
+	include?: boolean;
 }
 
 // ****************************************************************
