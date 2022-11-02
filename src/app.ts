@@ -19,7 +19,7 @@ interface Color {
 // VARIABLES
 // ****************************************************************
 
-let COLORS_DATA: any = {};
+let DATA: any = {};
 
 // ****************************************************************
 // FUNCTIONS
@@ -65,8 +65,8 @@ function start() {
 	console.log('hello world');
 	fetch('./data.json')
 		.then(response => response.json())
-		.then(data => COLORS_DATA = data)
-		.then(() => console.log(COLORS_DATA.colors[0].name))
+		.then(data => DATA = data)
+		.then(() => console.log(DATA.colors[0].name))
 }
 
 start();
