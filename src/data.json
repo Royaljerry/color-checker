@@ -1,38 +1,46 @@
 {
-	"colors": {
-		"white": {
+	"colors": [
+		{
+			"name": "white",
 			"value": "#ffffff",
 			"type": "light",
 			"include": false
 		},
-		"grayLighter": {
+		{
+			"name": "grayLighter",
 			"value": "#f5f5f6",
 			"type": "light"
 		},
-		"grayLight": {
+		{
+			"name": "grayLight",
 			"value": "#e5e1e3",
 			"type": "light"
 		},
-		"grayMid": {
+		{
+			"name": "grayMid",
 			"value": "#bfbbbd",
 			"type": "light"
 		},
-		"grayDark": {
+		{
+			"name": "grayDark",
 			"value": "#818387",
 			"type": "dark"
 		},
-		"grayDarker": {
+		{
+			"name": "grayDarker",
 			"value": "#3e4147",
 			"type": "dark"
 		},
-		"black": {
+		{
+			"name": "black",
 			"value": "#000000",
 			"type": "dark",
 			"include": false
 		},
-		"accent": {
+		{
+			"name": "accent",
 			"value": "#cc2e2e",
 			"type": "dark"
 		}
-	}
+	]
 }

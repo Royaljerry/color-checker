@@ -2,9 +2,14 @@
 // TYPES
 // ****************************************************************
 
+interface Data {
+	colors: Color[];
+}
+
 type ColorType = 'light' | 'dark';
 
 interface Color {
+	name: string;
 	value: string;
 	type: ColorType;
 	include: boolean;
@@ -61,7 +66,7 @@ function start() {
 	fetch('./data.json')
 		.then(response => response.json())
 		.then(data => COLORS_DATA = data)
-		.then(() => console.log(COLORS_DATA))
+		.then(() => console.log(COLORS_DATA.colors[0].name))
 }
 
 start();
