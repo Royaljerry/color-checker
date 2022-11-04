@@ -67,13 +67,12 @@ function getParts(colors: Color[]): any {
 // MAIN ENTRY POINT
 // ****************************************************************
 
-function start() {
-	fetch('./data.json')
-		.then(response => response.json())
-		.then(data => CC_DATA = data)
-		// .then(() => initSelection(CC_DATA.colors))
-		.then(() => console.log(CC_DATA.colors[0].name))
-		.then(() => console.log(getParts(CC_DATA.colors)))
+async function init() {
+	const request = new Request('./data.json');
+	const response = await fetch(request);
+	const data = await response.json();
+
+	console.log(getParts(data.colors));
 }
 
-start();
+init();
