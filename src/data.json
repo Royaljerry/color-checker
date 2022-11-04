@@ -2,44 +2,44 @@
 	"colors": [
 		{
 			"name": "white",
-			"value": "#ffffff",
+			"valueHex": "#ffffff",
 			"type": "light",
 			"include": false
 		},
 		{
 			"name": "grayLighter",
-			"value": "#f5f5f6",
+			"valueHex": "#f5f5f6",
 			"type": "light"
 		},
 		{
 			"name": "grayLight",
-			"value": "#e5e1e3",
+			"valueHex": "#e5e1e3",
 			"type": "light"
 		},
 		{
 			"name": "grayMid",
-			"value": "#bfbbbd",
+			"valueHex": "#bfbbbd",
 			"type": "light"
 		},
 		{
 			"name": "grayDark",
-			"value": "#818387",
+			"valueHex": "#818387",
 			"type": "dark"
 		},
 		{
 			"name": "grayDarker",
-			"value": "#3e4147",
+			"valueHex": "#3e4147",
 			"type": "dark"
 		},
 		{
 			"name": "black",
-			"value": "#000000",
+			"valueHex": "#000000",
 			"type": "dark",
 			"include": false
 		},
 		{
 			"name": "accent",
-			"value": "#cc2e2e",
+			"valueHex": "#cc2e2e",
 			"type": "dark"
 		}
 	]

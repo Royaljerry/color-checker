@@ -7,18 +7,44 @@
 @import "mixins";
 
 // ****************************************************************
+// VARIABLES
+// ****************************************************************
+
+:root {
+	--content-size: 75%;
+	--transition: 0.25s;
+	--gap-mid: 0.6rem;
+	--gap-2s: calc(0.25 * var(--gap-mid));
+	--gap-1s: calc(0.5 * var(--gap-mid));
+	--gap-m: var(--gap-mid);
+	--gap-1l: calc(1.5 * var(--gap-mid));
+	--gap-2l: calc(2 * var(--gap-mid));
+	--gap-3l: calc(3 * var(--gap-mid));
+	--gap-4l: calc(5 * var(--gap-mid));
+	--color-white: rgb(255, 255, 255);
+	--color-black: rgb(0, 0, 0);
+	--color-background: rgba(0, 0, 0, 0.025);
+	--color-accent: rgb(171, 71, 188); /* Material: Purple 400 */
+	--color-accent-hover: rgb(142, 36, 170, 0.35);
+	--color-legend-border: rgb(34, 34, 34);
+	--color-shadow-light: rgba(0, 0, 0, 0.1);
+	--color-shadow-dark: rgba(0, 0, 0, 0.25);
+	--color-same-color: rgb(199, 199, 199);
+}
+
+// ****************************************************************
 // ELEMENTS
 // ****************************************************************
+
+* {
+	box-sizing: border-box;
+}
 
 body {
 	@include gaps;
 	position: relative;
 	box-sizing: border-box;
 	font-family: $typography__font-family--default;
-}
-
-div {
-	box-sizing: border-box;
 }
 
 h1, h2, h3, h4 {
@@ -28,6 +54,148 @@ h1, h2, h3, h4 {
 // ****************************************************************
 // UTILITIES
 // ****************************************************************
+
+body {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: Roboto;
+	font-size: 0.75rem;
+	background-color: var(--color-background);
+}
+
+p {
+	padding: 0;
+	margin: 0;
+}
+
+h2 {
+	margin: 0 0 var(--gap-2l);
+	padding: 0;
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+.selection {
+	display: grid;
+	grid-gap: var(--gap-1l);
+	width: var(--content-size);
+	height: var(--content-size);
+}
+
+.result {
+	display: none;
+	width: var(--content-size);
+	height: var(--content-size);
+}
+
+.result__colors-used {
+	display: grid;
+	gap: var(--gap-1l);
+	grid-template-columns: repeat(3, 1fr);
+	margin-bottom: var(--gap-4l);
+}
+
+.result__colors-selected {
+	display: grid;
+	gap: var(--gap-1l);
+	grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+	margin-bottom: var(--gap-4l);
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 5%;
+	text-align: center;
+}
+
+.box--selectable {
+	border-radius: var(--gap-1s);
+}
+
+.same-color {
+	border: 1px var(--color-same-color) dashed;
+	background-color: var(--color-white);
+	color: var(--color-same-color);
+	cursor: default;
+}
+
+.legend {
+	border: 1px var(--color-legend-border) solid;
+	color: var(--color-black);
+	font-weight: 600;
+}
+
+.legend--select {
+	margin-right: var(--gap-m);
+}
+
+.legend--result {
+	margin-right: 0;
+}
+
+.hover {
+	transition: box-shadow var(--transition);
+}
+
+.hover:hover {
+	box-shadow: 0 0 var(--gap-mid) var(--gap-1s) var(--color-shadow-light);
+	cursor: pointer;
+	transition: box-shadow var(--transition);
+}
+
+.hover--dark:hover {
+	box-shadow: 0 0 var(--gap-mid) var(--gap-1s) var(--color-shadow-dark);
+}
+
+.name {
+	margin-bottom: var(--gap-1s);
+}
+
+.value {
+	font-family: 'Roboto Mono';
+	font-size: 80%;
+}
+
+.button {
+	display: block;
+	margin: var(--gap-2l) auto 0 auto;
+	border: none;
+	border-radius: var(--gap-1s);
+	background-color: var(--color-accent);
+	padding: var(--gap-2l) var(--gap-4l);
+	cursor: pointer;
+	font-family: Roboto;
+	font-weight: 600;
+	color: var(--color-white);
+	font-size: 1rem;
+	transition: box-shadow var(--transition);
+}
+
+@media print {
+	.button {
+		display: none;
+	}
+}
+
+.button:hover {
+	box-shadow: 0 0 var(--gap-mid) var(--gap-1s) var(--color-accent-hover);
+	transition: box-shadow var(--transition);
+}
+
+.upper {
+	text-transform: uppercase;
+}
+
+.nomargin {
+	margin: 0;
+}
 
 // ****************************************************************
 // PARTS

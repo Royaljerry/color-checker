@@ -10,7 +10,7 @@ type ColorType = 'light' | 'dark';
 
 interface Color {
 	name: string;
-	value: string;
+	valueHex: string;
 	type: ColorType;
 	include?: boolean;
 }
@@ -20,10 +20,17 @@ interface Color {
 // ****************************************************************
 
 let CC_DATA: any = {};
+let CC_COLORS: any;
 
 // ****************************************************************
 // FUNCTIONS
 // ****************************************************************
+
+function getNumberOfParts(colors: Color[]): number {
+	return Object.entries(colors).filter(([key, value]) => {
+		return value.include !== false;
+	}).length;
+}
 
 // ================================================
 // Helpers
@@ -34,23 +41,11 @@ let CC_DATA: any = {};
 // ================================================
 
 // ================================================
-// Signature
-// ================================================
-
-// ================================================
-// Initializers
-// ================================================
-
-// ================================================
 // Factories
 // ================================================
 
 // ================================================
-// Validators
-// ================================================
-
-// ================================================
-// Parsers
+// Initializers
 // ================================================
 
 // ================================================
@@ -62,11 +57,11 @@ let CC_DATA: any = {};
 // ****************************************************************
 
 function start() {
-	console.log('hello world');
 	fetch('./data.json')
 		.then(response => response.json())
 		.then(data => CC_DATA = data)
 		.then(() => console.log(CC_DATA.colors[0].name))
+		.then(() => console.log(getNumberOfParts(CC_DATA.colors)))
 }
 
 start();
