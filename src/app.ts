@@ -19,34 +19,45 @@ interface Color {
 // VARIABLES
 // ****************************************************************
 
+// ================================================
+// Constants
+// ================================================
+
 let CC_DATA: any = {};
-let CC_COLORS: any;
+let NUMBER_OF_PARTS: Color[];
 
 // ****************************************************************
 // FUNCTIONS
 // ****************************************************************
 
-function getNumberOfParts(colors: Color[]): number {
-	return Object.entries(colors).filter(([key, value]) => {
-		return value.include !== false;
-	}).length;
-}
-
 // ================================================
 // Helpers
 // ================================================
+
+function getParts(colors: Color[]): any {
+	return colors.filter((color: Color) => color.include !== false);
+}
 
 // ================================================
 // Handlers
 // ================================================
 
 // ================================================
-// Factories
-// ================================================
-
-// ================================================
 // Initializers
 // ================================================
+
+// function initSelection(colors: Color[]) {
+// 	for (const colorRow in colors) {
+// 		if (colors[colorRow].include !== false) {
+// 			makeLegend('select', selection, colorRow);
+// 			for (const colorCol in colors) {
+// 				if (colors[colorCol].include !== false) {
+// 					makeBox('select', selection, colorRow, colorCol);
+// 				}
+// 			}
+// 		}
+// 	}
+// }
 
 // ================================================
 // Updaters
@@ -60,8 +71,9 @@ function start() {
 	fetch('./data.json')
 		.then(response => response.json())
 		.then(data => CC_DATA = data)
+		// .then(() => initSelection(CC_DATA.colors))
 		.then(() => console.log(CC_DATA.colors[0].name))
-		.then(() => console.log(getNumberOfParts(CC_DATA.colors)))
+		.then(() => console.log(getParts(CC_DATA.colors)))
 }
 
 start();
