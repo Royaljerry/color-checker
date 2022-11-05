@@ -25,6 +25,8 @@ interface Color {
 // Constants
 // ================================================
 
+// ToDo: use glob object for these constants
+
 let CC_DATA: any = {};
 let CC_COLORS_INCLUDED: Color[];
 
@@ -32,13 +34,15 @@ let CC_COLORS_INCLUDED: Color[];
 // DOM-parts
 // ================================================
 
-const selection = document.querySelector('.selection') as HTMLDivElement;
-const buttonSum = document.querySelector('.sum') as HTMLDivElement;
-const result = document.querySelector('.result') as HTMLDivElement;
-const resultUsed = document.querySelector('.result__colors-used') as HTMLDivElement;
-const resultTitleSelected = document.querySelector('.result__title-selected') as HTMLDivElement;
-const resultSelected = document.querySelector('.result__colors-selected') as HTMLDivElement;
-const buttonReset = document.querySelector('.reset') as HTMLDivElement;
+// ToDo: eliminate these variables, use values directly
+
+// const selection = elem('.selection') as HTMLDivElement;
+// const buttonSum = elem('.sum') as HTMLDivElement;
+const result = elem('.result') as HTMLDivElement;
+const resultUsed = elem('.result__colors-used') as HTMLDivElement;
+const resultTitleSelected = elem('.result__title-selected') as HTMLDivElement;
+const resultSelected = elem('.result__colors-selected') as HTMLDivElement;
+// const buttonReset = elem('.reset') as HTMLDivElement;
 
 // ****************************************************************
 // FUNCTIONS
@@ -47,6 +51,22 @@ const buttonReset = document.querySelector('.reset') as HTMLDivElement;
 // ================================================
 // Helpers
 // ================================================
+
+function elem(selector: string): Element | null {
+	return document.querySelector(selector);
+}
+
+function elems(selector: string): NodeListOf<Element> | null {
+	return document.querySelectorAll(selector);
+}
+
+function style(element: Element, property: string, value: string) {
+	if (element) {
+		((element as HTMLElement).style as any)[property] = value
+	} else {
+		console.warn(`${element} not found.`)
+	};
+}
 
 function getColorsIncluded(): Color[] {
 	return CC_DATA.colors.filter((color: Color) => color.include !== false);
@@ -64,8 +84,16 @@ function negate(value: string): string {
 // Handlers
 // ================================================
 
+function sum() {
+	console.log('SUM');
+}
+
+function reset() {
+	console.log('RESET');
+}
+
 // ================================================
-// Initializers
+// Parts
 // ================================================
 
 function makeLegend(
@@ -79,7 +107,7 @@ function makeLegend(
 	legend.style.backgroundColor = backgroundColor.valueHex;
 	legend.style.color = backgroundColor.type === 'dark' ? 'var(--color-white)' : 'var(--color-dark)';
 	legend.innerHTML = `<p class="name">${backgroundColor.name}</p><p class="value upper">${backgroundColor.valueHex}</p>`;
-	selection.appendChild(legend);
+	elem('.selection')!.appendChild(legend);
 }
 
 function makeBox(
@@ -125,8 +153,12 @@ function makeBox(
 		box.innerHTML = 'Same color';
 		box.classList.add('same-color')
 	}
-	selection.appendChild(box);
+	elem('.selection')!.appendChild(box);
 }
+
+// ================================================
+// Initializers
+// ================================================
 
 function initSelection() {
 	for (const colorRow of CC_COLORS_INCLUDED) {
@@ -137,6 +169,12 @@ function initSelection() {
 			makeBox('select', colorRow, colorCol);
 		}
 	}
+
+	style(elem('.selection')!, 'gridTemplateColumns', `1.5fr repeat(${CC_COLORS_INCLUDED.length}, 1fr)`);
+	style(elem('.selection')!, 'gridTemplateRows', `repeat(${CC_COLORS_INCLUDED.length}, 1fr)`);
+
+	elem('.sum')?.addEventListener('click', sum);
+	elem('.reset')?.addEventListener('click', reset);
 }
 
 // ================================================
