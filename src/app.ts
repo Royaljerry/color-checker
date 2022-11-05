@@ -129,11 +129,37 @@ function setData(element: HTMLElement, key: string, value: string) {
 // ================================================
 
 function sum() {
-	console.log('SUM');
+	// ToDo (error): get selectedBoxes!
+	const selectedBoxes = Array.from(document.querySelectorAll('.hover')).filter((box) => (box as HTMLElement).dataset.active === 'true');
+	setStyle(elem('.selection')!, 'display', 'none');
+	setStyle(elem('.sum')!, 'display', 'none');
+	setStyle(elem('.result')!, 'display', 'block');
+	console.log(selectedBoxes);
+	// selection.style.display = 'none';
+	// buttonSum.style.display = 'none';
+	// result.style.display = 'block';
+	for (const color of CC_COLORS_INCLUDED) {
+		makeLegend('result', color);
+	}
+	if (selectedBoxes.length) {
+		/**
+		 * makeBox:
+		 * mode: LegendMode,
+		 * backgroundColor: Color,
+		 * foregroundColor: Color
+		 */
+		selectedBoxes.forEach((box) => {
+			// console.log(box.colors.background);
+			// makeBox('result', box.colors.background, box.colors.foreground);
+		});
+	} else {
+		resultTitleSelected.style.display = 'none';
+		resultSelected.style.display = 'none';
+	}
 }
 
 function reset() {
-	console.log('RESET');
+	document.location.reload();
 }
 
 // ================================================
