@@ -70,7 +70,6 @@ function negate(value: string): string {
 
 function makeLegend(
 		mode: LegendMode,
-		targetElement: HTMLDivElement,
 		backgroundColor: Color
 	) {
 	const legend = document.createElement('div');
@@ -80,12 +79,11 @@ function makeLegend(
 	legend.style.backgroundColor = backgroundColor.valueHex;
 	legend.style.color = backgroundColor.type === 'dark' ? 'var(--color-white)' : 'var(--color-dark)';
 	legend.innerHTML = `<p class="name">${backgroundColor.name}</p><p class="value upper">${backgroundColor.valueHex}</p>`;
-	targetElement.appendChild(legend);
+	selection.appendChild(legend);
 }
 
 function makeBox(
 		mode: LegendMode,
-		targetElement: HTMLDivElement,
 		backgroundColor: Color,
 		foregroundColor: Color
 	) {
@@ -127,16 +125,16 @@ function makeBox(
 		box.innerHTML = 'Same color';
 		box.classList.add('same-color')
 	}
-	targetElement.appendChild(box);
+	selection.appendChild(box);
 }
 
 function initSelection() {
 	for (const colorRow of CC_COLORS_INCLUDED) {
 		console.log(colorRow.valueHex);
-		makeLegend('select', selection, colorRow);
+		makeLegend('select', colorRow);
 		for (const colorCol of CC_COLORS_INCLUDED) {			
 			console.log(colorCol.valueHex);
-			makeBox('select', selection, colorRow, colorCol);
+			makeBox('select', colorRow, colorCol);
 		}
 	}
 }
