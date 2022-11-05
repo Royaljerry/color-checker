@@ -22,6 +22,12 @@ interface Color {
 // ****************************************************************
 
 // ================================================
+// String Literals
+// ================================================
+
+// ToDo (e.g. 'Same color')
+
+// ================================================
 // Constants
 // ================================================
 
@@ -83,6 +89,8 @@ function elems(selector: string): NodeListOf<Element> | null {
 // --------------------------------
 // Set
 // --------------------------------
+
+// ToDo: unify 'else' branches
 
 function setClass(element: Element, className: string) {
 	if (element) {
@@ -163,34 +171,25 @@ function makeBox(
 			case 'select':
 				setClass(box, 'hover');
 				setClass(box, 'box--selectable');
-				// box.classList.add('hover');
-				// box.classList.add('box--selectable');
-				// if (backgroundColor.type === 'dark') box.classList.add('hover--dark');
 				if (backgroundColor.type === 'dark') setClass(box, 'hover--dark');
-				box.innerHTML = `
-					<p class="name">${foregroundColor}</p>
-					<p class="value upper">${foregroundColor.valueHex}</p>
-				`;
+				setText(box, `<p class="name">${foregroundColor.name}</p><p class="value upper">${foregroundColor.valueHex}</p>`);
 				box.onclick = () => {
-					box.dataset.active = negate(box.dataset.active!);
+					setData(box, 'active', negate(box.dataset.active!));
 					if (box.dataset.active === 'true') {
-						box.style.border = '3px var(--color-accent) solid';
+						setStyle(box, 'border', '3px var(--color-accent) solid');
 					} else {
-						box.style.border = 'none';
+						setStyle(box, 'border', 'none');
 					}
 				};
 				break;
 			case 'result':
-				box.innerHTML = `
-					<p class="name"><span class="upper">FG: </span>${foregroundColor}</p>
-					<p class="name nomargin"><span class="upper">BG: </span>${backgroundColor}</p>
-				`;
+				setText(box, `<p class="name"><span class="upper">FG: </span>${foregroundColor.name}</p><p class="name nomargin"><span class="upper">BG: </span>${backgroundColor.name}</p>`);
 				break;
 		}
 	} else {
-		box.classList.add('box');
-		box.innerHTML = 'Same color';
-		box.classList.add('same-color')
+		setClass(box, 'box');
+		setClass(box, 'same-color');
+		setText(box, 'Same color');
 	}
 	elem('.selection')!.appendChild(box);
 }
