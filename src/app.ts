@@ -32,13 +32,13 @@ let NUMBER_OF_PARTS: Color[];
 // DOM-parts
 // ================================================
 
-const selection = document.querySelector('.selection');
-const buttonSum = document.querySelector('.sum');
-const result = document.querySelector('.result');
-const resultUsed = document.querySelector('.result__colors-used');
-const resultTitleSelected = document.querySelector('.result__title-selected');
-const resultSelected = document.querySelector('.result__colors-selected');
-const buttonReset = document.querySelector('.reset');
+const selection = document.querySelector('.selection') as HTMLDivElement;
+const buttonSum = document.querySelector('.sum') as HTMLDivElement;
+const result = document.querySelector('.result') as HTMLDivElement;
+const resultUsed = document.querySelector('.result__colors-used') as HTMLDivElement;
+const resultTitleSelected = document.querySelector('.result__title-selected') as HTMLDivElement;
+const resultSelected = document.querySelector('.result__colors-selected') as HTMLDivElement;
+const buttonReset = document.querySelector('.reset') as HTMLDivElement;
 
 // ****************************************************************
 // FUNCTIONS
@@ -78,6 +78,7 @@ function makeLegend(
 	legend.classList.add('box');
 	legend.classList.add('legend');
 	legend.classList.add(`legend--${mode}`);
+	// console.log('>>>', getColorByName(colors, background)); // undefined
 	legend.style.backgroundColor = getColorByName(colors, background).valueHex;
 	legend.style.color = getColorByName(colors, background).type === 'dark' ? 'var(--color-white)' : 'var(--color-dark)';
 	legend.innerHTML = `<p class="name">${background}</p><p class="value upper">${getColorByName(colors, background).valueHex}</p>`;
@@ -97,16 +98,16 @@ function makeBox(
 		box.dataset.background = background;
 		box.dataset.foreground = foreground;
 		box.classList.add('box');
-		box.style.backgroundColor = colors[background].value;
-		box.style.color = colors[foreground].value;
+		box.style.backgroundColor = getColorByName(colors, background).valueHex;
+		box.style.color = getColorByName(colors, foreground).valueHex;
 		switch (mode) {
 			case 'select':
 				box.classList.add('hover');
 				box.classList.add('box--selectable');
-				if (colors[background].type === 'dark') box.classList.add('hover--dark');
+				if (getColorByName(colors, background).type === 'dark') box.classList.add('hover--dark');
 				box.innerHTML = `
 					<p class="name">${foreground}</p>
-					<p class="value upper">${colors[foreground].value}</p>
+					<p class="value upper">${getColorByName(colors, foreground).valueHex}</p>
 				`;
 				box.onclick = () => {
 					box.dataset.active = negate(box.dataset.active!);
@@ -132,16 +133,18 @@ function makeBox(
 	targetElement.appendChild(box);
 }
 
-function initSelection(colors: Color[]) {
+function initSelection(colors: Color[], selection: HTMLDivElement) {
 	for (const colorRow in colors) {
-		if (colors[colorRow].include !== false) {
-			makeLegend(colors, 'select', selection, colorRow);
-			for (const colorCol in colors) {
-				if (colors[colorCol].include !== false) {
-					makeBox(colors, 'select', selection, colorRow, colorCol);
-				}
-			}
-		}
+		console.log(getColorByName(colors, colors[colorRow].name));
+		// if (colors[colorRow].include !== false) {
+		// 	// makeLegend(colors, 'select', selection, colorRow);
+		// 	makeLegend(colors, 'select', selection, getColorByName(colors, colorRow).valueHex);
+		// 	for (const colorCol in colors) {
+		// 		if (colors[colorCol].include !== false) {
+		// 			makeBox(colors, 'select', selection, getColorByName(colors, colorRow).valueHex, getColorByName(colors, colorCol).valueHex);
+		// 		}
+		// 	}
+		// }
 	}
 }
 
@@ -158,7 +161,7 @@ async function init() {
 	const response = await fetch(request);
 	const data = await response.json();
 
-	initSelection(data.colors)
+	initSelection(data.colors, selection);
 
 	console.log(getParts(data.colors));
 }
