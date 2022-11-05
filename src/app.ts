@@ -83,53 +83,52 @@ function makeLegend(
 	targetElement.appendChild(legend);
 }
 
-// function makeBox(
-// 		colors: Color[],
-// 		mode: LegendMode,
-// 		targetElement: HTMLDivElement,
-// 		background: string,
-// 		foreground: string
-// 	) {
-// 	const box = document.createElement('div');
-// 	if (foreground !== background) {
-// 		box.dataset.active = 'false';
-// 		box.dataset.background = background;
-// 		box.dataset.foreground = foreground;
-// 		box.classList.add('box');
-// 		box.style.backgroundColor = getColorByName(colors, background).valueHex;
-// 		box.style.color = getColorByName(colors, foreground).valueHex;
-// 		switch (mode) {
-// 			case 'select':
-// 				box.classList.add('hover');
-// 				box.classList.add('box--selectable');
-// 				if (getColorByName(colors, background).type === 'dark') box.classList.add('hover--dark');
-// 				box.innerHTML = `
-// 					<p class="name">${foreground}</p>
-// 					<p class="value upper">${getColorByName(colors, foreground).valueHex}</p>
-// 				`;
-// 				box.onclick = () => {
-// 					box.dataset.active = negate(box.dataset.active!);
-// 					if (box.dataset.active === 'true') {
-// 						box.style.border = '3px var(--color-accent) solid';
-// 					} else {
-// 						box.style.border = 'none';
-// 					}
-// 				};
-// 				break;
-// 			case 'result':
-// 				box.innerHTML = `
-// 					<p class="name"><span class="upper">FG: </span>${foreground}</p>
-// 					<p class="name nomargin"><span class="upper">BG: </span>${background}</p>
-// 				`;
-// 				break;
-// 		}
-// 	} else {
-// 		box.classList.add('box');
-// 		box.innerHTML = 'Same color';
-// 		box.classList.add('same-color')
-// 	}
-// 	targetElement.appendChild(box);
-// }
+function makeBox(
+		mode: LegendMode,
+		targetElement: HTMLDivElement,
+		backgroundColor: Color,
+		foregroundColor: Color
+	) {
+	const box = document.createElement('div');
+	if (foregroundColor !== backgroundColor) {
+		box.dataset.active = 'false';
+		box.dataset.background = backgroundColor.name;
+		box.dataset.foreground = foregroundColor.name;
+		box.classList.add('box');
+		box.style.backgroundColor = backgroundColor.valueHex;
+		box.style.color = foregroundColor.valueHex;
+		switch (mode) {
+			case 'select':
+				box.classList.add('hover');
+				box.classList.add('box--selectable');
+				if (backgroundColor.type === 'dark') box.classList.add('hover--dark');
+				box.innerHTML = `
+					<p class="name">${foregroundColor}</p>
+					<p class="value upper">${foregroundColor.valueHex}</p>
+				`;
+				box.onclick = () => {
+					box.dataset.active = negate(box.dataset.active!);
+					if (box.dataset.active === 'true') {
+						box.style.border = '3px var(--color-accent) solid';
+					} else {
+						box.style.border = 'none';
+					}
+				};
+				break;
+			case 'result':
+				box.innerHTML = `
+					<p class="name"><span class="upper">FG: </span>${foregroundColor}</p>
+					<p class="name nomargin"><span class="upper">BG: </span>${backgroundColor}</p>
+				`;
+				break;
+		}
+	} else {
+		box.classList.add('box');
+		box.innerHTML = 'Same color';
+		box.classList.add('same-color')
+	}
+	targetElement.appendChild(box);
+}
 
 function initSelection() {
 	for (const colorRow of CC_COLORS_INCLUDED) {
@@ -137,7 +136,7 @@ function initSelection() {
 		makeLegend('select', selection, colorRow);
 		for (const colorCol of CC_COLORS_INCLUDED) {			
 			console.log(colorCol.valueHex);
-			// makeBox(colors, 'select', selection, getColorByName(colors, colors[colorRow].name).valueHex, getColorByName(colors, colors[colorCol].name).valueHex);
+			makeBox('select', selection, colorRow, colorCol);
 		}
 	}
 }
