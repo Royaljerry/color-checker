@@ -88,7 +88,7 @@ function setClass(element: Element, className: string) {
 	if (element) {
 		element.classList.add(className);
 	} else {
-		console.warn(`${element} not found (class).`)
+		console.warn(`${element} not found (class).`);
 	}
 }
 
@@ -104,7 +104,15 @@ function setText(element: Element, content: string) {
 	if (element) {
 		element.innerHTML = content;
 	} else {
-		console.warn(`${element} not found (text).`)
+		console.warn(`${element} not found (text).`);
+	}
+}
+
+function setData(element: HTMLElement, key: string, value: string) {
+	if (element) {
+		element.dataset[key] = value;
+	} else {
+		console.warn(`${element} not found (data).`);
 	}
 }
 
@@ -129,13 +137,12 @@ function makeLegend(
 		backgroundColor: Color
 	) {
 	const legend = document.createElement('div');
-	legend.classList.add('box');
-	legend.classList.add('legend');
-	legend.classList.add(`legend--${mode}`);
-
+	setClass(legend, 'box');
+	setClass(legend, 'legend');
+	setClass(legend, `legend--${mode}`);
 	setStyle(legend, 'backgroundColor', backgroundColor.valueHex);
 	setStyle(legend, 'color', backgroundColor.type === 'dark' ? 'var(--color-white)' : 'var(--color-dark)');
-	legend.innerHTML = `<p class="name">${backgroundColor.name}</p><p class="value upper">${backgroundColor.valueHex}</p>`;
+	setText(legend, `<p class="name">${backgroundColor.name}</p><p class="value upper">${backgroundColor.valueHex}</p>`);
 	elem('.selection')!.appendChild(legend);
 }
 
@@ -146,17 +153,20 @@ function makeBox(
 	) {
 	const box = document.createElement('div');
 	if (foregroundColor !== backgroundColor) {
-		box.dataset.active = 'false';
-		box.dataset.background = backgroundColor.name;
-		box.dataset.foreground = foregroundColor.name;
-		box.classList.add('box');
-		box.style.backgroundColor = backgroundColor.valueHex;
-		box.style.color = foregroundColor.valueHex;
+		setData(box, 'active', 'false');
+		setData(box, 'background', backgroundColor.name);
+		setData(box, 'foreground', foregroundColor.name);
+		setClass(box, 'box');
+		setStyle(box, 'backgroundColor', backgroundColor.valueHex);
+		setStyle(box, 'color', foregroundColor.valueHex);
 		switch (mode) {
 			case 'select':
-				box.classList.add('hover');
-				box.classList.add('box--selectable');
-				if (backgroundColor.type === 'dark') box.classList.add('hover--dark');
+				setClass(box, 'hover');
+				setClass(box, 'box--selectable');
+				// box.classList.add('hover');
+				// box.classList.add('box--selectable');
+				// if (backgroundColor.type === 'dark') box.classList.add('hover--dark');
+				if (backgroundColor.type === 'dark') setClass(box, 'hover--dark');
 				box.innerHTML = `
 					<p class="name">${foregroundColor}</p>
 					<p class="value upper">${foregroundColor.valueHex}</p>
