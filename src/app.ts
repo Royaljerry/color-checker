@@ -52,22 +52,6 @@ const resultSelected = elem('.result__colors-selected') as HTMLDivElement;
 // Helpers
 // ================================================
 
-function elem(selector: string): Element | null {
-	return document.querySelector(selector);
-}
-
-function elems(selector: string): NodeListOf<Element> | null {
-	return document.querySelectorAll(selector);
-}
-
-function style(element: Element, property: string, value: string) {
-	if (element) {
-		((element as HTMLElement).style as any)[property] = value
-	} else {
-		console.warn(`${element} not found.`)
-	};
-}
-
 function getColorsIncluded(): Color[] {
 	return CC_DATA.colors.filter((color: Color) => color.include !== false);
 }
@@ -78,6 +62,50 @@ function getColorByName(name: string): Color {
 
 function negate(value: string): string {
 	return value === 'false' ? 'true' : 'false';
+}
+
+// ================================================
+// DOM
+// ================================================
+
+// --------------------------------
+// Get
+// --------------------------------
+
+function elem(selector: string): Element | null {
+	return document.querySelector(selector);
+}
+
+function elems(selector: string): NodeListOf<Element> | null {
+	return document.querySelectorAll(selector);
+}
+
+// --------------------------------
+// Set
+// --------------------------------
+
+function setClass(element: Element, className: string) {
+	if (element) {
+		element.classList.add(className);
+	} else {
+		console.warn(`${element} not found (class).`)
+	}
+}
+
+function setStyle(element: Element, property: string, value: string) {
+	if (element) {
+		((element as HTMLElement).style as any)[property] = value
+	} else {
+		console.warn(`${element} not found (style).`)
+	};
+}
+
+function setText(element: Element, content: string) {
+	if (element) {
+		element.innerHTML = content;
+	} else {
+		console.warn(`${element} not found (text).`)
+	}
 }
 
 // ================================================
@@ -104,8 +132,9 @@ function makeLegend(
 	legend.classList.add('box');
 	legend.classList.add('legend');
 	legend.classList.add(`legend--${mode}`);
-	legend.style.backgroundColor = backgroundColor.valueHex;
-	legend.style.color = backgroundColor.type === 'dark' ? 'var(--color-white)' : 'var(--color-dark)';
+
+	setStyle(legend, 'backgroundColor', backgroundColor.valueHex);
+	setStyle(legend, 'color', backgroundColor.type === 'dark' ? 'var(--color-white)' : 'var(--color-dark)');
 	legend.innerHTML = `<p class="name">${backgroundColor.name}</p><p class="value upper">${backgroundColor.valueHex}</p>`;
 	elem('.selection')!.appendChild(legend);
 }
@@ -162,16 +191,14 @@ function makeBox(
 
 function initSelection() {
 	for (const colorRow of CC_COLORS_INCLUDED) {
-		console.log(colorRow.valueHex);
 		makeLegend('select', colorRow);
 		for (const colorCol of CC_COLORS_INCLUDED) {			
-			console.log(colorCol.valueHex);
 			makeBox('select', colorRow, colorCol);
 		}
 	}
 
-	style(elem('.selection')!, 'gridTemplateColumns', `1.5fr repeat(${CC_COLORS_INCLUDED.length}, 1fr)`);
-	style(elem('.selection')!, 'gridTemplateRows', `repeat(${CC_COLORS_INCLUDED.length}, 1fr)`);
+	setStyle(elem('.selection')!, 'gridTemplateColumns', `1.5fr repeat(${CC_COLORS_INCLUDED.length}, 1fr)`);
+	setStyle(elem('.selection')!, 'gridTemplateRows', `repeat(${CC_COLORS_INCLUDED.length}, 1fr)`);
 
 	elem('.sum')?.addEventListener('click', sum);
 	elem('.reset')?.addEventListener('click', reset);
