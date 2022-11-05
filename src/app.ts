@@ -150,7 +150,7 @@ function sum() {
 		 */
 		selectedBoxes.forEach((box) => {
 			// console.log(box.colors.background);
-			// makeBox('result', box.colors.background, box.colors.foreground);
+			makeBox('result', box.colors.background, box.colors.foreground);
 		});
 	} else {
 		resultTitleSelected.style.display = 'none';
